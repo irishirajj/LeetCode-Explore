@@ -1,0 +1,27 @@
+**VIDEO EXPLANATION :-**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nY9l-jUKgjI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+**THE CODE :-**
+```
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        map<Node*, Node*> m;            //This map will be used to map the copy of each node to the node.
+        Node* ptr = head;                     //We initialized ptr to iterate through all the nodes in the linked list.
+        while (ptr) {
+            m[ptr] =new Node(ptr->val); //For each node in the list, we made a copy node but store only the value in the copy note, next and random pointers are left empty;
+            ptr = ptr->next;
+        }
+		//Once the whole list is created, we will fill the next and random pointer values.
+        ptr = head;
+        while (ptr) {
+            m[ptr]->next = m[ptr->next];                    //Here the map is used to get the correspoinding values of next 
+            m[ptr]->random = m[ptr->random];        //and random pointers.
+            ptr = ptr->next;
+        }
+        return m[head]; 
+    }
+};
+```
